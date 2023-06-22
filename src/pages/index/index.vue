@@ -1,15 +1,17 @@
 <template>
   <view class="content">
-    <image class="logo" src="/static/logo.png"></image>
+    <!-- <image class="logo" src="/static/logo.png"></image>
     <view class="text-area">
       <text class="title">{{ title }}</text>
       <test />
-    </view>
+    </view> -->
+    <playground />
   </view>
 </template>
 
 <script>
-import test from '../../components/test.vue';
+// import test from '../../components/test.vue';
+import playground from '../../components/playground'
 export default {
   data() {
     return {
@@ -17,7 +19,8 @@ export default {
     }
   },
   components: {
-    test
+    // test
+    playground
   },
   onLoad() {},
   methods: {},
