@@ -5,4 +5,5 @@ export default defineConfig({
   plugins: [
     uni(),
   ],
+  assetsInclude: ["**/*.m4a"]
 })

@@ -9,11 +9,16 @@
                 <div class="student" v-for="student in row.students" :style="{left: student.x+'vw'}">114514</div>
             </div>
         </div>
+        <div class="footer">
+            <div @click="start">开始/暂停</div>
+        </div>
     </div>
 </template>
 <script setup>
+import { useSound } from '@vueuse/sound'
 import { reactive } from 'vue';
 import { useIntervalFn, useCssVar } from '@vueuse/core'
+import glasswork from '../../static/sound/glasswalk.m4a'
 
 const runtime = reactive({
     lines: [],
@@ -28,6 +33,7 @@ runtime.lines= line.map(() => {
         blocks: blocks.map(() => {
             return {
                 type: 1,
+                bullets: [],
                 teachers: []
             }
         })
@@ -37,6 +43,7 @@ const teacher = {
     x: 100
 }
 runtime.lines[0].students.push(teacher);
+const { play } = useSound(glasswork);
 const { pause, resume, isActive } = useIntervalFn(() => {
     console.log('游戏刻')
     runtime.lines.forEach(l => {
@@ -46,6 +53,12 @@ const { pause, resume, isActive } = useIntervalFn(() => {
     })
 }, 10)
 // resume();
+
+function start() {
+    play()
+    resume()
+}
+pause()
 
 </script>
 <style lang="scss" scoped>
