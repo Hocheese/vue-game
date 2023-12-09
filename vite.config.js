@@ -5,5 +5,8 @@ export default defineConfig({
   plugins: [
     uni(),
   ],
-  assetsInclude: ["**/*.m4a"]
+  assetsInclude: ["**/*.m4a"],
+  optimizeDeps: {
+    exclude: ['vue-demi']
+  }
 })

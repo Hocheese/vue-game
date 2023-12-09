@@ -1,7 +1,11 @@
 <template>
     <div class="playground">
         <div class="top">
-            <div class="cardArea">1111</div>
+            <div class="cardArea">
+                <div v-for="teacher in runtime.teachers" class="teacher">
+                    <div >111</div>
+                </div>
+            </div>
         </div>
         <div class="glass">
             <div class="row" v-for="row in runtime.lines">
@@ -21,8 +25,8 @@ import { useIntervalFn, useCssVar } from '@vueuse/core'
 import glasswork from '../../static/sound/glasswalk.m4a'
 
 const runtime = reactive({
-    lines: [],
-    interval: null
+    lines: [], // 草地行
+    teachers:[], // 拥有的老师
 });
 
 const line = new Array(5).fill(5)
@@ -39,16 +43,20 @@ runtime.lines= line.map(() => {
         })
     }
 })
-const teacher = {
-    x: 100
+const studentTest = {
+    x: -10
 }
-runtime.lines[0].students.push(teacher);
+const teacherTest = {
+    id:'zzj'
+}
+runtime.teachers.push(teacherTest);
+runtime.lines[0].students.push(studentTest);
 const { play } = useSound(glasswork);
 const { pause, resume, isActive } = useIntervalFn(() => {
     console.log('游戏刻')
     runtime.lines.forEach(l => {
         l.students.forEach(s => {
-            s.x-=0.01
+            s.x+=0.01
         })
     })
 }, 10)
@@ -67,6 +75,17 @@ pause()
     width: 100vw;
     display: flex;
     flex-direction: column;
+}
+.top {
+    .cardArea{
+        height: 100px;
+        background-color: chocolate;
+        .teacher{
+            width: 10vh;
+            background-color: burlywood;
+            height: 100%;
+        }
+    }
 }
 .glass{
     background-color: greenyellow;
